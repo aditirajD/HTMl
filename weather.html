@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather</title>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            background-color: rgb(158, 237, 237);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .weather_container {
+            color: rgb(2, 33, 22);
+        }
+
+        .temp {
+            font-size: 4.5rem;
+        }
+
+        .time_location {
+            font-size: 2rem;
+
+        }
+
+        .condition {
+            margin: 0, 5rem;
+            margin-left: 0.2rem;
+        }
+
+        nav {
+            height: 50px;
+            margin: 5rem;
+        }
+        .search_area{
+            padding: 1rem 0;
+            outline: none;
+            border: none;
+            color: gray;
+            background-color: transparent;
+            font-size: 1.1rem;
+            border-bottom: 2px solid white;
+            width: 98%;
+        }
+        nav form button{
+            padding: 0.5rem;
+            background-color: white;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        let target ='dehradun'
+
+        const fetchResults = async (targetlocation) =>{
+            let url = "http://api.weatherapi.com/v1/current.json?key=2a59b7dc1daf493783a94244252509&q=${targetlocation}"
+
+
+            const res = await fetch(url)
+            const data = await res.json()
+
+            console.log(data)
+
+            let locationName = data.location.Name
+            let time=data.location.localtime
+
+            let temp = data.cuurent.temp_c
+
+            let condition = data.current.condition.text
+
+        }
+        fetchResults(target)
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="weather_container">
+            <div class="temp">
+                <p>20</p>
+            </div>
+            <div class="time_location">
+                <p>Dehradun</p>
+                <p>12:58-Monday 2025-9-15</p>
+            </div>
+            <div class="condition">
+                <p></p>
+
+                <p>Mist</p>
+            </div>
+        </div>
+        <nav>
+            <form>
+                <input type="text" placeholder="search for a location" class="search_area" />
+                <button type="submit"> search button</button>
+            </form>
+        </nav>
+
+    </div>
+
+</body>
+
+</html>
